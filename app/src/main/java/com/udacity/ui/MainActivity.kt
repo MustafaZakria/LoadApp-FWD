@@ -138,7 +138,6 @@ class MainActivity : AppCompatActivity() {
                             downloadedFile.status = success
                         else
                             downloadedFile.status = fail
-                        Log.d("***",  statusOfTheDownload.toString())
                     }
                 }
             }
@@ -157,7 +156,6 @@ class MainActivity : AppCompatActivity() {
         downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         downloadID =
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
-        Log.d("***",  downloadID.toString())
     }
 
 }

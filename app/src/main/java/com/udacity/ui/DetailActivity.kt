@@ -8,6 +8,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.udacity.R
+import com.udacity.utils.Constants.intent_name
+import com.udacity.utils.Constants.intent_status
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
 
@@ -29,9 +31,8 @@ class DetailActivity : AppCompatActivity() {
 
 
     private fun getValuesFromIntent() {
-        Log.d("***", intent.getStringExtra("name").toString())
-        tvFileNameValue.text = intent.getStringExtra("name")
-        tvStatusValue.text = intent.getStringExtra("status")
+        tvFileNameValue.text = intent.getStringExtra(intent_name)
+        tvStatusValue.text = intent.getStringExtra(intent_status)
         intent.removeExtra("name")
         intent.removeExtra("status")
     }

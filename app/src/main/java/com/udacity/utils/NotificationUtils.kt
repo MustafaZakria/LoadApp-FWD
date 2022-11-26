@@ -27,6 +27,8 @@ import com.udacity.models.DownloadedFile
 import com.udacity.ui.DetailActivity
 import com.udacity.utils.Constants.REQUEST_CODE
 import com.udacity.utils.Constants.download_notification_channel_id
+import com.udacity.utils.Constants.intent_name
+import com.udacity.utils.Constants.intent_status
 import com.udacity.utils.Constants.notification_id
 
 
@@ -39,8 +41,8 @@ fun NotificationManager.sendNotification(
 
     val detailIntent = Intent(applicationContext, DetailActivity::class.java)
 
-    detailIntent.putExtra("name", downloadedFile.fileName)
-    detailIntent.putExtra("status", downloadedFile.status)
+    detailIntent.putExtra(intent_name, downloadedFile.fileName)
+    detailIntent.putExtra(intent_status, downloadedFile.status)
 
     val detailPendingIntent: PendingIntent = PendingIntent.getActivity(
         applicationContext,
