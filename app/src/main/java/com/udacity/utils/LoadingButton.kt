@@ -25,9 +25,7 @@ class LoadingButton @JvmOverloads constructor(
 
     private val valueAnimator = ValueAnimator()
 
-    public var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { _, _, new ->
-
-    }
+    var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { _, _, new -> }
 
 
     init {
@@ -86,13 +84,13 @@ class LoadingButton @JvmOverloads constructor(
 
     @SuppressLint("ClickableViewAccessibility")
     override fun performClick(): Boolean {
-//        if (super.performClick()) return true
+//        if () return true
         buttonState = ButtonState.Loading
 
         startTimer()
 
         invalidate()
-        return true
+        return super.performClick()
     }
 
     private fun startTimer() {
@@ -100,11 +98,11 @@ class LoadingButton @JvmOverloads constructor(
 
             override fun onTick(millisUntilFinished: Long) {
                 degree += 24
-                Log.d("***", degree.toString())
                 invalidate()
             }
 
             override fun onFinish() {
+                degree = 1f
                 buttonState = ButtonState.Completed
                 invalidate()
             }

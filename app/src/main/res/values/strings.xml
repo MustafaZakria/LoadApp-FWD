@@ -22,4 +22,5 @@
     <string name="ok">Ok</string>
 
     <string name="downloading">We are loading..</string>
+    <string name="downloadToast">Please select the file to download</string>
 </resources>

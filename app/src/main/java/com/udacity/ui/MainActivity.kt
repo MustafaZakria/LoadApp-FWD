@@ -7,11 +7,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.udacity.R
+import com.udacity.utils.Constants.appURL
+import com.udacity.utils.Constants.glideURL
+import com.udacity.utils.Constants.retrofitURL
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -31,14 +37,44 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
+        onClickDownloadButton()
+    }
+
+    private fun onClickDownloadButton() {
         custom_button.setOnClickListener {
-            download()
+            if (radioGroup.checkedRadioButtonId == -1) {
+                Toast.makeText(this, this.getString(R.string.downloadToast), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                when (radioGroup.checkedRadioButtonId) {
+                    R.id.radioDownloadGlide -> URL = glideURL
+                    R.id.radioDownloadApp -> URL = appURL
+                    R.id.radioDownloadRetrofit -> URL = retrofitURL
+                }
+                download()
+            }
+
         }
     }
+
+    lateinit var downloadManager: DownloadManager
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            if(id == downloadID) {
+                val query = DownloadManager.Query()
+                query.setFilterById(id)
+                val cursor: Cursor = downloadManager.query(query)
+
+                if (cursor.moveToFirst()) {
+                    if (cursor.count > 0) {
+                        val statusOfTheDownload =
+                            cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) //8 success, 16 fail
+                        Log.d("***", statusOfTheDownload.toString())
+                    }
+                }
+            }
         }
     }
 
@@ -51,15 +87,14 @@ class MainActivity : AppCompatActivity() {
                 .setAllowedOverMetered(true)
                 .setAllowedOverRoaming(true)
 
-        val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         downloadID =
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
 
     }
 
     companion object {
-        private const val URL =
-            "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
+        private var URL = ""
         private const val CHANNEL_ID = "channelId"
     }
 
