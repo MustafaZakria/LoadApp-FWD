@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ND940C3-Project</string>
     <string name="app_description">Download files from Internet</string>
     <string name="action_settings">Settings</string>
@@ -9,7 +9,6 @@
     <string name="notification_button">See changes</string>
 
     <string name="button_name">Click me</string>
-    <string name="button_loading">We are loading </string>
     <string name="title_activity_detail">DetailActivity</string>
 
     <string name="glide_download">Glide - Image Loading Library Bump Tech</string>
@@ -19,8 +18,10 @@
 
     <string name="status">Status:</string>
     <string name="file_name">File Name:</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
 
-    <string name="downloading">We are loading..</string>
+    <string name="downloading">We are loading</string>
     <string name="downloadToast">Please select the file to download</string>
+
+    <string name="check_status">check the status</string>
 </resources>

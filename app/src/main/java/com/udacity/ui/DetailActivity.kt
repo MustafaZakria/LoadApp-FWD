@@ -1,9 +1,12 @@
 package com.udacity.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.udacity.R
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.content_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -11,6 +14,18 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
+
+        getValuesFromIntent()
     }
 
+    private fun getValuesFromIntent() {
+        val intent = intent
+        tvFileNameValue.text = intent.getStringExtra("name")
+        tvStatusValue.text = intent.getStringExtra("status")
+    }
+
+    fun intentToMainActivity(view: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }

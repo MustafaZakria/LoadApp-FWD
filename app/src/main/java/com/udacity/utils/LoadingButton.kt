@@ -12,6 +12,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.udacity.R
 import com.udacity.models.ButtonState
 import kotlin.concurrent.thread
@@ -25,11 +27,13 @@ class LoadingButton @JvmOverloads constructor(
 
     private val valueAnimator = ValueAnimator()
 
-    var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { _, _, new -> }
+    val buttonState = MutableLiveData<ButtonState>()
+//    var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new -> }
 
 
     init {
         isClickable = true
+        buttonState.value = ButtonState.Completed
     }
 
 
@@ -49,7 +53,7 @@ class LoadingButton @JvmOverloads constructor(
             it.drawRect(0f, 0f, widthSize.toFloat(), heightSize.toFloat(), paint)
 
             var btnText = ""
-            if(buttonState == ButtonState.Loading) {
+            if(buttonState.value == ButtonState.Loading) {
                 btnText = context.getString(R.string.downloading)
                 it.drawLoadingCircle(degree)
             }else {
@@ -85,7 +89,7 @@ class LoadingButton @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     override fun performClick(): Boolean {
 //        if () return true
-        buttonState = ButtonState.Loading
+        buttonState.value = ButtonState.Loading
 
         startTimer()
 
@@ -103,7 +107,7 @@ class LoadingButton @JvmOverloads constructor(
 
             override fun onFinish() {
                 degree = 1f
-                buttonState = ButtonState.Completed
+                buttonState.value = ButtonState.Completed
                 invalidate()
             }
         }.start()

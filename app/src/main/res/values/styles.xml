@@ -17,4 +17,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="tvStyle">
+        <item name="android:textColor">@color/blueDark</item>
+        <item name="android:textSize">22sp</item>
+    </style>
 </resources>
