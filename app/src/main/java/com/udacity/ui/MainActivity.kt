@@ -3,7 +3,6 @@ package com.udacity.ui
 import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -16,7 +15,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.udacity.R
@@ -40,9 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private var downloadedFile = DownloadedFile()
 
-    private lateinit var notificationManager: NotificationManager
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
+    private var notificationDesc = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +82,8 @@ class MainActivity : AppCompatActivity() {
                     this,
                     NotificationManager::class.java
                 ) as NotificationManager
-                notificationManager.sendNotification(this.getString(R.string.notification_description), this, downloadedFile)
+                notificationManager.sendNotification(notificationDesc, this, downloadedFile)
+                downloadedFile = DownloadedFile()
             }
         })
 
@@ -102,16 +99,21 @@ class MainActivity : AppCompatActivity() {
                     R.id.radioDownloadGlide -> {
                         downloadedFile.url = glideURL
                         downloadedFile.fileName = this.getString(R.string.glide_download)
+                        notificationDesc = this.getString(R.string.notification_glide_description)
                     }
                     R.id.radioDownloadApp -> {
                         downloadedFile.url = appURL
                         downloadedFile.fileName = this.getString(R.string.load_app_download)
+                        notificationDesc = this.getString(R.string.notification_app_description)
                     }
                     R.id.radioDownloadRetrofit -> {
                         downloadedFile.url = retrofitURL
                         downloadedFile.fileName = this.getString(R.string.retrofit_download)
+                        notificationDesc =
+                            this.getString(R.string.notification_retrofit_description)
                     }
                 }
+
                 download()
             }
 
@@ -136,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                             downloadedFile.status = success
                         else
                             downloadedFile.status = fail
-                        Log.d("***", statusOfTheDownload.toString())
+                        Log.d("***",  statusOfTheDownload.toString())
                     }
                 }
             }
@@ -155,7 +157,7 @@ class MainActivity : AppCompatActivity() {
         downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
         downloadID =
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
-
+        Log.d("***",  downloadID.toString())
     }
 
 }

@@ -18,51 +18,56 @@
         android:onClick="intentToMainActivity"
         android:text="@string/ok"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
     <TextView
         android:id="@+id/tvFileName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="@string/file_name"
         android:textSize="19sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvFileNameValue"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/tvFileNameValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvFileNameValue"
         style="@style/tvStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvFileName"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="TextView" />
+        tools:text="The Project 3 repository is downloaded" />
 
     <TextView
         android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/status"
         android:textSize="19sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvStatusValue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvFileName" />
+        app:layout_constraintTop_toBottomOf="@id/tvFileName"
+        app:layout_constraintEnd_toStartOf="@id/tvStatusValue"/>
 
     <TextView
         android:id="@+id/tvStatusValue"
         style="@style/tvStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@+id/tvFileNameValue"
         app:layout_constraintTop_toBottomOf="@+id/tvFileNameValue"
+        app:layout_constraintStart_toEndOf="@id/tvStatus"
         tools:text="TextView" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

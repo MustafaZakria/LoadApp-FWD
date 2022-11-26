@@ -5,7 +5,9 @@
 
 
     <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
-    <string name="notification_description">The Project 3 repository is downloaded</string>
+    <string name="notification_glide_description">The Glide repository is downloaded</string>
+    <string name="notification_app_description">The Project 3 repository is downloaded</string>
+    <string name="notification_retrofit_description">The Retrofit repository is downloaded</string>
     <string name="notification_button">See changes</string>
 
     <string name="button_name">Click me</string>

@@ -12,4 +12,12 @@ object Constants {
     const val notification_id = 0
     const val download_notification_channel_id = "channel_id"
     const val download_notification_channel_name = "Download"
+
+    const val intent_name ="NAME"
+    const val intent_status ="STATUS"
+
+    const val REQUEST_CODE = 0
+    const val FLAGS = 0
+
+
 }

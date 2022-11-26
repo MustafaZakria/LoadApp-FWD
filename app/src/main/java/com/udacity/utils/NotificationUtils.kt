@@ -25,13 +25,9 @@ import androidx.core.app.NotificationCompat
 import com.udacity.R
 import com.udacity.models.DownloadedFile
 import com.udacity.ui.DetailActivity
+import com.udacity.utils.Constants.REQUEST_CODE
 import com.udacity.utils.Constants.download_notification_channel_id
 import com.udacity.utils.Constants.notification_id
-
-
-// Notification ID.
-private val REQUEST_CODE = 0
-private val FLAGS = 0
 
 
 @SuppressLint("WrongConstant")
@@ -42,13 +38,15 @@ fun NotificationManager.sendNotification(
 ) {
 
     val detailIntent = Intent(applicationContext, DetailActivity::class.java)
+
     detailIntent.putExtra("name", downloadedFile.fileName)
     detailIntent.putExtra("status", downloadedFile.status)
+
     val detailPendingIntent: PendingIntent = PendingIntent.getActivity(
         applicationContext,
         REQUEST_CODE,
         detailIntent,
-        FLAGS
+        PendingIntent.FLAG_UPDATE_CURRENT
     )
 
     val builder = NotificationCompat.Builder(
